@@ -22,8 +22,20 @@ public class CambiarAnimación : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("velocidad", MathF.Abs(rb.linearVelocityX));
-        sr.flipX = rb.linearVelocityX < 0;
+
+        float velocidadX = rb.linearVelocityX;
+
+        animator.SetFloat("velocidad", Mathf.Abs(velocidadX));
+        
+        if(velocidadX > 0.1f)
+        {
+            sr.flipX = false;
+        }
+        else if(velocidadX < -0.1f)
+        {
+            sr.flipX = true;
+        }
+
         animator.SetBool("enPiso", estado.estaEnPiso);
     }
 }
