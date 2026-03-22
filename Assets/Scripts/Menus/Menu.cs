@@ -1,3 +1,4 @@
+//Giancarlo Moreno Vázquez
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class Menu : MonoBehaviour
 {
+    //Declarando variables 
     private UIDocument menu;
     private Button botonJugar;
     private Button botonAyuda;
@@ -20,7 +22,7 @@ public class Menu : MonoBehaviour
 
     void OnEnable()
     {
-        menu = GetComponent<UIDocument>();
+        menu = GetComponent<UIDocument>();  //Obteniendo el documento UI
         var root = menu.rootVisualElement;
 
         //Botones de menu principal
@@ -38,8 +40,7 @@ public class Menu : MonoBehaviour
         panelAyuda = root.Q<VisualElement>("MenuAyuda");
         panelCreditos = root.Q<VisualElement>("MenuCreditos");
 
-        //Acciones
-        //botonJugar.RegisterCallback<ClickEvent>(EmpiezaJuego);
+        //Asignando una acción a cada botón
         botonJugar.clicked += EmpiezaJuego;
         botonAyuda.clicked += () => MostrarPanel(panelAyuda);
         botonCreditos.clicked += () => MostrarPanel(panelCreditos);
@@ -50,18 +51,18 @@ public class Menu : MonoBehaviour
         
     }
 
-    private void EmpiezaJuego()
+    private void EmpiezaJuego() //Función que comienza el juego cambiando de escena
     {
         SceneManager.LoadScene("SampleScene");
     }
 
-    private void MostrarPanel(VisualElement panel)
+    private void MostrarPanel(VisualElement panel)  //Función que ayuda a cambiar de panel del menú principal 
     {
         panelMenu.style.display = DisplayStyle.None;
         panel.style.display = DisplayStyle.Flex;
     }
 
-    private void VolverAlMenu()
+    private void VolverAlMenu() //Función que ayuda a cerrar el menú actual y regresar al menú principal
     {
         panelAyuda.style.display = DisplayStyle.None;
         panelCreditos.style.display = DisplayStyle.None;

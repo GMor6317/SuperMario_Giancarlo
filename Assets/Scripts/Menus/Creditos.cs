@@ -1,32 +1,30 @@
+//Giancarlo Moreno Vázquez
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CreditsScroller : MonoBehaviour
 {
-    public float speed = 200f; // Píxeles por segundo
-    private VisualElement creditsTrack;
+    //Declarando variables
+    public float speed = 200f;
+    private VisualElement credits;
     private float currentY = 0f;
 
     void OnEnable()
     {
-        // Obtener el documento de UI
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        creditsTrack = root.Q<VisualElement>("Creditos");
+        var root = GetComponent<UIDocument>().rootVisualElement;    //Obteninedo el documento UI
+        credits = root.Q<VisualElement>("Creditos");
         
-        // Empezar desde el fondo de la pantalla
-        currentY = Screen.height;
+        currentY = Screen.height;   // Empezar desde el fondo de la pantalla
     }
 
     void Update()
     {
-        if (creditsTrack != null)
+        if (credits != null)
         {
-            // Mover hacia arriba
-            currentY -= speed * Time.deltaTime;
-            creditsTrack.style.top = currentY;
+            currentY -= speed * Time.deltaTime; //Si hay créditos, los mueve hacia arriba 
+            credits.style.top = currentY;
 
-            // Opcional: Reiniciar o detener si ya pasaron todos los créditos
-            if (currentY < -creditsTrack.layout.height * 2)
+            if (currentY < -credits.layout.height * 2)  //Si terminaron los créditos, vuelven a empezar de manera automática
             {
                 currentY = Screen.height;
             }
